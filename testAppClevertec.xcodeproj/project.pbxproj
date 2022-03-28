@@ -1,0 +1,561 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1812D4DD27EF6A85007C2C45 /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1812D4DC27EF6A84007C2C45 /* Box.swift */; };
+		1812D4E327EF71CA007C2C45 /* FavoritesScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1812D4E227EF71CA007C2C45 /* FavoritesScreenViewModel.swift */; };
+		1812D4E527EF71E3007C2C45 /* MainScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1812D4E427EF71E3007C2C45 /* MainScreenViewModel.swift */; };
+		1812D4E727EF77F5007C2C45 /* MainFavoritesViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1812D4E627EF77F5007C2C45 /* MainFavoritesViewModelType.swift */; };
+		1812D4EF27F11DB0007C2C45 /* DetailsScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1812D4EE27F11DAF007C2C45 /* DetailsScreenViewModel.swift */; };
+		1812D4F127F11F3A007C2C45 /* DetailsViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1812D4F027F11F3A007C2C45 /* DetailsViewModelType.swift */; };
+		1812D4F327F13A4F007C2C45 /* MainCollectionViewCellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1812D4F227F13A4F007C2C45 /* MainCollectionViewCellType.swift */; };
+		18911F2627E9DD3B0027825A /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18911F2527E9DD3B0027825A /* LoadingView.swift */; };
+		18911F2927E9FA180027825A /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18911F2827E9FA180027825A /* CoreDataManager.swift */; };
+		18A8296B27E3FA3900A8FC7B /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A8296A27E3FA3900A8FC7B /* TabBarController.swift */; };
+		18A8296D27E3FB9100A8FC7B /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A8296C27E3FB9100A8FC7B /* FavoritesViewController.swift */; };
+		18A8296F27E3FB9E00A8FC7B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A8296E27E3FB9E00A8FC7B /* MainViewController.swift */; };
+		18A8297127E3FBF300A8FC7B /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A8297027E3FBF300A8FC7B /* DetailsViewController.swift */; };
+		18A8297A27E6074A00A8FC7B /* MainCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A8297927E6074A00A8FC7B /* MainCollectionViewCell.swift */; };
+		18A8297D27E6B35B00A8FC7B /* NetworkCoreDataStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A8297C27E6B35A00A8FC7B /* NetworkCoreDataStructs.swift */; };
+		18A8297F27E6B37F00A8FC7B /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A8297E27E6B37F00A8FC7B /* NetworkManager.swift */; };
+		18F5A07627E3F4B400999D8B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F5A07527E3F4B400999D8B /* AppDelegate.swift */; };
+		18F5A07827E3F4B400999D8B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F5A07727E3F4B400999D8B /* SceneDelegate.swift */; };
+		18F5A07A27E3F4B400999D8B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F5A07927E3F4B400999D8B /* ViewController.swift */; };
+		18F5A07D27E3F4B400999D8B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18F5A07B27E3F4B400999D8B /* Main.storyboard */; };
+		18F5A08027E3F4B400999D8B /* testAppClevertec.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 18F5A07E27E3F4B400999D8B /* testAppClevertec.xcdatamodeld */; };
+		18F5A08227E3F4BF00999D8B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18F5A08127E3F4BF00999D8B /* Assets.xcassets */; };
+		18F5A08527E3F4BF00999D8B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18F5A08327E3F4BF00999D8B /* LaunchScreen.storyboard */; };
+		DD4140B32E8A0544F6953EC8 /* Pods_testAppClevertec.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4276DC3FED6DCE9A3F3356C4 /* Pods_testAppClevertec.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1812D4DC27EF6A84007C2C45 /* Box.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Box.swift; sourceTree = "<group>"; };
+		1812D4E227EF71CA007C2C45 /* FavoritesScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesScreenViewModel.swift; sourceTree = "<group>"; };
+		1812D4E427EF71E3007C2C45 /* MainScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewModel.swift; sourceTree = "<group>"; };
+		1812D4E627EF77F5007C2C45 /* MainFavoritesViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFavoritesViewModelType.swift; sourceTree = "<group>"; };
+		1812D4EE27F11DAF007C2C45 /* DetailsScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsScreenViewModel.swift; sourceTree = "<group>"; };
+		1812D4F027F11F3A007C2C45 /* DetailsViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewModelType.swift; sourceTree = "<group>"; };
+		1812D4F227F13A4F007C2C45 /* MainCollectionViewCellType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewCellType.swift; sourceTree = "<group>"; };
+		18911F2527E9DD3B0027825A /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		18911F2827E9FA180027825A /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		18A8296A27E3FA3900A8FC7B /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		18A8296C27E3FB9100A8FC7B /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
+		18A8296E27E3FB9E00A8FC7B /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		18A8297027E3FBF300A8FC7B /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
+		18A8297927E6074A00A8FC7B /* MainCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewCell.swift; sourceTree = "<group>"; };
+		18A8297C27E6B35A00A8FC7B /* NetworkCoreDataStructs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkCoreDataStructs.swift; sourceTree = "<group>"; };
+		18A8297E27E6B37F00A8FC7B /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		18F5A07227E3F4B400999D8B /* testAppClevertec.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = testAppClevertec.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		18F5A07527E3F4B400999D8B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		18F5A07727E3F4B400999D8B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		18F5A07927E3F4B400999D8B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		18F5A07C27E3F4B400999D8B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		18F5A07F27E3F4B400999D8B /* testAppClevertec.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = testAppClevertec.xcdatamodel; sourceTree = "<group>"; };
+		18F5A08127E3F4BF00999D8B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		18F5A08427E3F4BF00999D8B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		18F5A08627E3F4BF00999D8B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4276DC3FED6DCE9A3F3356C4 /* Pods_testAppClevertec.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_testAppClevertec.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		74AA6871D2873E02C20F599A /* Pods-testAppClevertec.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testAppClevertec.debug.xcconfig"; path = "Target Support Files/Pods-testAppClevertec/Pods-testAppClevertec.debug.xcconfig"; sourceTree = "<group>"; };
+		CEDBC26E3A4289E31346A5A2 /* Pods-testAppClevertec.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testAppClevertec.release.xcconfig"; path = "Target Support Files/Pods-testAppClevertec/Pods-testAppClevertec.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		18F5A06F27E3F4B400999D8B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DD4140B32E8A0544F6953EC8 /* Pods_testAppClevertec.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1812D4DE27EF6F96007C2C45 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				18A8296A27E3FA3900A8FC7B /* TabBarController.swift */,
+				18A8296E27E3FB9E00A8FC7B /* MainViewController.swift */,
+				18A8297927E6074A00A8FC7B /* MainCollectionViewCell.swift */,
+				18A8297027E3FBF300A8FC7B /* DetailsViewController.swift */,
+				18911F2527E9DD3B0027825A /* LoadingView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		1812D4DF27EF6FAA007C2C45 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				1812D4E427EF71E3007C2C45 /* MainScreenViewModel.swift */,
+				1812D4E227EF71CA007C2C45 /* FavoritesScreenViewModel.swift */,
+				1812D4EE27F11DAF007C2C45 /* DetailsScreenViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		1812D4E027EF6FB7007C2C45 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1812D4ED27EF7A0C007C2C45 /* Protocols */,
+				1812D4E127EF6FF9007C2C45 /* Services */,
+				1812D4DC27EF6A84007C2C45 /* Box.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		1812D4E127EF6FF9007C2C45 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				18A8297C27E6B35A00A8FC7B /* NetworkCoreDataStructs.swift */,
+				18A8297E27E6B37F00A8FC7B /* NetworkManager.swift */,
+				18911F2827E9FA180027825A /* CoreDataManager.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		1812D4ED27EF7A0C007C2C45 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				1812D4E627EF77F5007C2C45 /* MainFavoritesViewModelType.swift */,
+				1812D4F027F11F3A007C2C45 /* DetailsViewModelType.swift */,
+				1812D4F227F13A4F007C2C45 /* MainCollectionViewCellType.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		18A8297627E6023D00A8FC7B /* App */ = {
+			isa = PBXGroup;
+			children = (
+				18F5A07527E3F4B400999D8B /* AppDelegate.swift */,
+				18F5A07727E3F4B400999D8B /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		18F5A06927E3F4B400999D8B = {
+			isa = PBXGroup;
+			children = (
+				18F5A07427E3F4B400999D8B /* testAppClevertec */,
+				18F5A07327E3F4B400999D8B /* Products */,
+				3BDAF6BAE22154000FC76239 /* Pods */,
+				7FF39F65C92A048F3B9A700B /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		18F5A07327E3F4B400999D8B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				18F5A07227E3F4B400999D8B /* testAppClevertec.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		18F5A07427E3F4B400999D8B /* testAppClevertec */ = {
+			isa = PBXGroup;
+			children = (
+				18A8297627E6023D00A8FC7B /* App */,
+				1812D4DE27EF6F96007C2C45 /* View */,
+				1812D4DF27EF6FAA007C2C45 /* ViewModel */,
+				1812D4E027EF6FB7007C2C45 /* Model */,
+				18F5A08127E3F4BF00999D8B /* Assets.xcassets */,
+				18F5A07B27E3F4B400999D8B /* Main.storyboard */,
+				18F5A07927E3F4B400999D8B /* ViewController.swift */,
+				18A8296C27E3FB9100A8FC7B /* FavoritesViewController.swift */,
+				18F5A08327E3F4BF00999D8B /* LaunchScreen.storyboard */,
+				18F5A08627E3F4BF00999D8B /* Info.plist */,
+				18F5A07E27E3F4B400999D8B /* testAppClevertec.xcdatamodeld */,
+			);
+			path = testAppClevertec;
+			sourceTree = "<group>";
+		};
+		3BDAF6BAE22154000FC76239 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				74AA6871D2873E02C20F599A /* Pods-testAppClevertec.debug.xcconfig */,
+				CEDBC26E3A4289E31346A5A2 /* Pods-testAppClevertec.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		7FF39F65C92A048F3B9A700B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4276DC3FED6DCE9A3F3356C4 /* Pods_testAppClevertec.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		18F5A07127E3F4B400999D8B /* testAppClevertec */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 18F5A08927E3F4BF00999D8B /* Build configuration list for PBXNativeTarget "testAppClevertec" */;
+			buildPhases = (
+				9AD38DD125008A82136E352A /* [CP] Check Pods Manifest.lock */,
+				18F5A06E27E3F4B400999D8B /* Sources */,
+				18F5A06F27E3F4B400999D8B /* Frameworks */,
+				18F5A07027E3F4B400999D8B /* Resources */,
+				69524AA776DE5432D74D6C39 /* [CP] Embed Pods Frameworks */,
+				1874306527F14CD300697793 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = testAppClevertec;
+			productName = testAppClevertec;
+			productReference = 18F5A07227E3F4B400999D8B /* testAppClevertec.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		18F5A06A27E3F4B400999D8B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1250;
+				LastUpgradeCheck = 1250;
+				TargetAttributes = {
+					18F5A07127E3F4B400999D8B = {
+						CreatedOnToolsVersion = 12.5;
+					};
+				};
+			};
+			buildConfigurationList = 18F5A06D27E3F4B400999D8B /* Build configuration list for PBXProject "testAppClevertec" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 18F5A06927E3F4B400999D8B;
+			productRefGroup = 18F5A07327E3F4B400999D8B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				18F5A07127E3F4B400999D8B /* testAppClevertec */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		18F5A07027E3F4B400999D8B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18F5A08527E3F4BF00999D8B /* LaunchScreen.storyboard in Resources */,
+				18F5A08227E3F4BF00999D8B /* Assets.xcassets in Resources */,
+				18F5A07D27E3F4B400999D8B /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1874306527F14CD300697793 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 12;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n\n";
+		};
+		69524AA776DE5432D74D6C39 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-testAppClevertec/Pods-testAppClevertec-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-testAppClevertec/Pods-testAppClevertec-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-testAppClevertec/Pods-testAppClevertec-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9AD38DD125008A82136E352A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-testAppClevertec-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		18F5A06E27E3F4B400999D8B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1812D4F127F11F3A007C2C45 /* DetailsViewModelType.swift in Sources */,
+				1812D4E327EF71CA007C2C45 /* FavoritesScreenViewModel.swift in Sources */,
+				1812D4EF27F11DB0007C2C45 /* DetailsScreenViewModel.swift in Sources */,
+				18A8296F27E3FB9E00A8FC7B /* MainViewController.swift in Sources */,
+				18911F2627E9DD3B0027825A /* LoadingView.swift in Sources */,
+				1812D4E727EF77F5007C2C45 /* MainFavoritesViewModelType.swift in Sources */,
+				18A8297A27E6074A00A8FC7B /* MainCollectionViewCell.swift in Sources */,
+				18F5A07A27E3F4B400999D8B /* ViewController.swift in Sources */,
+				18F5A07627E3F4B400999D8B /* AppDelegate.swift in Sources */,
+				18A8297F27E6B37F00A8FC7B /* NetworkManager.swift in Sources */,
+				18A8297127E3FBF300A8FC7B /* DetailsViewController.swift in Sources */,
+				18F5A07827E3F4B400999D8B /* SceneDelegate.swift in Sources */,
+				18A8296B27E3FA3900A8FC7B /* TabBarController.swift in Sources */,
+				1812D4DD27EF6A85007C2C45 /* Box.swift in Sources */,
+				1812D4F327F13A4F007C2C45 /* MainCollectionViewCellType.swift in Sources */,
+				18A8296D27E3FB9100A8FC7B /* FavoritesViewController.swift in Sources */,
+				18F5A08027E3F4B400999D8B /* testAppClevertec.xcdatamodeld in Sources */,
+				18A8297D27E6B35B00A8FC7B /* NetworkCoreDataStructs.swift in Sources */,
+				18911F2927E9FA180027825A /* CoreDataManager.swift in Sources */,
+				1812D4E527EF71E3007C2C45 /* MainScreenViewModel.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		18F5A07B27E3F4B400999D8B /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				18F5A07C27E3F4B400999D8B /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		18F5A08327E3F4BF00999D8B /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				18F5A08427E3F4BF00999D8B /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		18F5A08727E3F4BF00999D8B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		18F5A08827E3F4BF00999D8B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		18F5A08A27E3F4BF00999D8B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 74AA6871D2873E02C20F599A /* Pods-testAppClevertec.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = testAppClevertec/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = qqq.testAppClevertec;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		18F5A08B27E3F4BF00999D8B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CEDBC26E3A4289E31346A5A2 /* Pods-testAppClevertec.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = testAppClevertec/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = qqq.testAppClevertec;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		18F5A06D27E3F4B400999D8B /* Build configuration list for PBXProject "testAppClevertec" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18F5A08727E3F4BF00999D8B /* Debug */,
+				18F5A08827E3F4BF00999D8B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		18F5A08927E3F4BF00999D8B /* Build configuration list for PBXNativeTarget "testAppClevertec" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18F5A08A27E3F4BF00999D8B /* Debug */,
+				18F5A08B27E3F4BF00999D8B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		18F5A07E27E3F4B400999D8B /* testAppClevertec.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				18F5A07F27E3F4B400999D8B /* testAppClevertec.xcdatamodel */,
+			);
+			currentVersion = 18F5A07F27E3F4B400999D8B /* testAppClevertec.xcdatamodel */;
+			path = testAppClevertec.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 18F5A06A27E3F4B400999D8B /* Project object */;
+}

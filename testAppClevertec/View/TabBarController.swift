@@ -1,15 +1,7 @@
-//
-//  TabBarController.swift
-//  testAppClevertec
-//
-//  Created by Apple on 18.03.22.
-//
-
 import UIKit
 
 class TabBarController: UITabBarController {
-    
-    struct Properties {
+    private struct Properties {
         static let mainName = "main"
         static let mainImage = UIImage(systemName: "list.bullet")
         static let favoritesName = "favorites"
@@ -26,8 +18,8 @@ class TabBarController: UITabBarController {
         tabBar.barTintColor = Properties.barTintColor
         tabBar.tintColor = Properties.selectedItemTintColor
         tabBar.unselectedItemTintColor = Properties.unselectedItemTintColor
-        let main = MainViewController()
-        let favorites = FavoritesViewController()
+        let main = MainViewController(viewModel: MainScreenViewModel(), refreshControl: UIRefreshControl(), animatedСircle: LoadingView())
+        let favorites = MainViewController(viewModel: FavoritesScreenViewModel(), refreshControl: nil, animatedСircle: nil)
         main.tabBarItem = UITabBarItem(title: Properties.mainName, image: Properties.mainImage, tag: 0)
         favorites.tabBarItem = UITabBarItem(title: Properties.favoritesName, image: Properties.favoritesImage, tag: 1)
         viewControllers = [main, favorites]

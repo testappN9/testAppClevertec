@@ -1,33 +1,15 @@
-//
-//  MainViewController.swift
-//  testAppClevertec
-//
-//  Created by Apple on 18.03.22.
-//
-
 import UIKit
 
 class MainViewController: UIViewController {
-    var mainCollection: UICollectionView?
-    let animatedСircle = LoadingCustomView()
-    let headView = UIView()
-    let refreshControl = UIRefreshControl()
-    let searchController = UISearchController(searchResultsController: nil)
-    var moviesList = [Movie]() {
-        didSet {
-            DispatchQueue.main.async {
-                self.openMoviesList = self.moviesList
-                self.refreshControl.endRefreshing()
-                self.animatedСircle.isHidden = true
-                self.animatedСircle.animationStop()
-                self.connectionProblemsAlert()
-                self.mainCollection?.reloadData()
-            }
-        }
-    }
-    var openMoviesList = [Movie]()
-    var savedMovieIds = [Int]()
-    struct Properties {
+    private var viewModel: MainFavoritesViewModelType!
+    private var dataArrayForCollection = [(Movie, Bool)]()
+    private var stateForCell = true
+    private let mainCollection = UICollectionView(frame: CGRect(), collectionViewLayout: UICollectionViewLayout())
+    private var refreshControl: UIRefreshControl?
+    private var animatedСircle: LoadingView?
+    private let headView = UIView()
+    private let searchController = UISearchController(searchResultsController: nil)
+    private struct Properties {
         static let cellName = "ListOfGamesViewCell"
         static let loadCircleSize: CGFloat = 50
         static let loadCircleBackgroundColor = UIColor.clear
@@ -39,41 +21,81 @@ class MainViewController: UIViewController {
         static let mainCollectionItemSideInsets: CGFloat = 20
         static let mainCollectionItemAspectRatio: CGFloat = 0.62
         static let searchBarTintColor = UIColor.lightGray
-        
     }
-    struct AlertConnection {
-        static let title = "Something went wrong"
-        static let buttonReload = "try again"
-        static let buttonCancel = "cancel"
+    
+    private struct AlertText {
+        static let connectTitle = "Something went wrong"
+        static let connectButtonReload = "try again"
+        static let connectButtonCancel = "cancel"
+        static let deleteTitle = "Delete this movie?"
+        static let deleteButtonYes = "yes"
+        static let deleteButtonNo = "no"
+    }
+    
+    convenience init(viewModel: MainFavoritesViewModelType, refreshControl: UIRefreshControl?, animatedСircle: LoadingView?) {
+        self.init(nibName: nil, bundle: nil)
+        self.viewModel = viewModel
+        self.refreshControl = refreshControl
+        self.animatedСircle = animatedСircle
+    }
+    
+    override init(nibName: String?, bundle: Bundle?) {
+        super.init(nibName: nibName, bundle: bundle)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setHeadView()
-        setMainCollection()
-        registerMainCollection()
-        setRefreshControl()
-        setSearchController()
-        getData()
-        loadingAnimation()
+        customizeViews()
+        viewModel.allDataWillUpdate()
+        bindingProcessing()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        savedMovieIds = CoreDataManager.data.getSavedMovieIds()
-        mainCollection?.reloadData()
+        viewModel.savedDataWillUpdate()
+        self.mainCollection.reloadData()
     }
     
-    func loadingAnimation() {
-        guard let collection = mainCollection else {return}
-        animatedСircle.backgroundColor = Properties.loadCircleBackgroundColor
-        collection.addSubview(animatedСircle)
-        animatedСircle.snp.makeConstraints { make in
-            make.width.height.equalTo(Properties.loadCircleSize)
-            make.centerX.centerY.equalTo(collection)
+    private func bindingProcessing() {
+        viewModel.readyMoviesList.bind { [unowned self] array in
+            self.dataArrayForCollection = array
+            self.refreshControl?.endRefreshing()
+            self.animatedСircle?.isHidden = true
+            self.animatedСircle?.animationStop()
+            self.mainCollection.reloadData()
+        }
+        
+        viewModel.alert.bind { [unowned self] type in
+            self.showAlert(type: type)
+        }
+        
+        viewModel.stateForCell.bind { [unowned self] state in
+            self.stateForCell = state
         }
     }
     
-    func setHeadView() {
+    private func customizeViews() {
+        setHeadView()
+        setMainCollection()
+        setAnimatedСircle()
+        setRefreshControl()
+        setSearchController()
+    }
+    
+    private func setAnimatedСircle() {
+        guard let circle = animatedСircle else { return }
+        circle.backgroundColor = Properties.loadCircleBackgroundColor
+        mainCollection.addSubview(circle)
+        circle.snp.makeConstraints { make in
+            make.width.height.equalTo(Properties.loadCircleSize)
+            make.centerX.centerY.equalTo(mainCollection)
+        }
+    }
+    
+    private func setHeadView() {
         headView.backgroundColor = Properties.headViewBackgroundColor
         headView.layer.borderWidth = Properties.headViewBorderWidth
         headView.layer.borderColor = Properties.headViewBorderColor
@@ -85,16 +107,15 @@ class MainViewController: UIViewController {
         }
     }
     
-    func setRefreshControl() {
-        refreshControl.addTarget(self, action: #selector(refresh(sender:)), for: .valueChanged)
+    private func setRefreshControl() {
+        refreshControl?.addTarget(self, action: #selector(refresh(sender:)), for: .valueChanged)
     }
     
-    @objc func refresh(sender: UIRefreshControl) {
-        getData()
+    @objc private func refresh(sender: UIRefreshControl) {
+        viewModel.allDataWillUpdate()
     }
     
-    func setSearchController() {
-        
+    private func setSearchController() {
         searchController.searchResultsUpdater = self
         definesPresentationContext = true
         searchController.obscuresBackgroundDuringPresentation = false
@@ -102,108 +123,77 @@ class MainViewController: UIViewController {
         headView.addSubview(searchController.searchBar)
     }
     
-    func registerMainCollection() {
-        mainCollection?.register(MainCollectionViewCell.self, forCellWithReuseIdentifier: Properties.cellName)
-        mainCollection?.delegate = self
-        mainCollection?.dataSource = self
-        mainCollection?.refreshControl = refreshControl
-    }
-    
-    func setMainCollection() {
+    private func setMainCollection() {
         let mainCollectionLayout = UICollectionViewFlowLayout()
         mainCollectionLayout.sectionInset.top = Properties.mainCollectionTopBottomInset
         mainCollectionLayout.sectionInset.bottom = Properties.mainCollectionTopBottomInset
         let itemWidth = self.view.frame.width - Properties.mainCollectionItemSideInsets
         let itemHeight = itemWidth * Properties.mainCollectionItemAspectRatio
         mainCollectionLayout.itemSize = CGSize(width: itemWidth, height: itemHeight)
-        mainCollection = UICollectionView(frame: self.view.bounds, collectionViewLayout: mainCollectionLayout)
-        guard let collection = mainCollection else { return }
-        collection.backgroundColor = Properties.mainCollectionBackgroundColor
-        view.addSubview(collection)
-        collection.snp.makeConstraints { make in
+        mainCollection.frame = self.view.bounds
+        mainCollection.collectionViewLayout = mainCollectionLayout
+        mainCollection.register(MainCollectionViewCell.self, forCellWithReuseIdentifier: Properties.cellName)
+        mainCollection.delegate = self
+        mainCollection.dataSource = self
+        mainCollection.refreshControl = refreshControl
+        mainCollection.backgroundColor = Properties.mainCollectionBackgroundColor
+        view.addSubview(mainCollection)
+        mainCollection.snp.makeConstraints { make in
             make.top.equalTo(headView.snp.bottom)
             make.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
         }
     }
     
-    func getData() {
-        NetworkManager.data.getAllData { [weak self] movies in
-            self?.moviesList = movies
+    private func showAlert(type: AlertType) {
+        var title = AlertText.deleteTitle
+        var okay = AlertText.deleteButtonYes
+        var cancel = AlertText.deleteButtonNo
+        if type == .noConnection {
+            title = AlertText.connectTitle
+            okay = AlertText.connectButtonReload
+            cancel = AlertText.connectButtonCancel
         }
-    }
-    
-    func connectionProblemsAlert() {
-        if moviesList.isEmpty {
-            let alert = UIAlertController(title: AlertConnection.title, message: nil, preferredStyle: .alert)
-            let actionOkey = UIAlertAction(title: AlertConnection.buttonReload, style: .default) { action in
-                self.getData()
-            }
-            let actionCancel = UIAlertAction(title: AlertConnection.buttonCancel, style: .cancel, handler: nil)
-            alert.addAction(actionOkey)
-            alert.addAction(actionCancel)
-            present(alert, animated: true, completion: nil)
+        let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
+        let actionOkey = UIAlertAction(title: okay, style: .default) { _ in
+            self.viewModel.movieMarked(movie: nil)
+            self.viewModel.allDataWillUpdate()
         }
+        let actionCancel = UIAlertAction(title: cancel, style: .default) { _ in
+        }
+        alert.view.tintColor = .black
+        alert.addAction(actionOkey)
+        alert.addAction(actionCancel)
+        present(alert, animated: true, completion: nil)
     }
 }
 
 extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return openMoviesList.count
-        
+        return dataArrayForCollection.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Properties.cellName, for: indexPath) as? MainCollectionViewCell {
-            var state = false
-            for item in savedMovieIds where item == openMoviesList[indexPath.item].id {
-                state = true
-            }
-            cell.setupCell(movie: openMoviesList[indexPath.item], isSaved: state, delegate: self)
+            cell.setupCell(movie: dataArrayForCollection[indexPath.item], delegate: self)
             return cell
         }
         fatalError()
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.present(DetailsViewController(movie: openMoviesList[indexPath.row]), animated: true, completion: nil)
+        self.present(DetailsViewController(viewModel: DetailsScreenViewModel(movie: dataArrayForCollection[indexPath.row].0)), animated: true, completion: nil)
     }
 }
 
-extension MainViewController: MainCollectionViewCellDelegate {
+extension MainViewController: MainCollectionViewCellType {
     func markMovie(movie: Movie) -> Bool {
-        return buttonAdd(movie: movie)
-    }
-    
-    func buttonAdd(movie: Movie) -> Bool {
-        if CoreDataManager.data.receiveItem(movie.id) == nil {
-            CoreDataManager.data.saveItem(movie: movie)
-            savedMovieIds.append(movie.id)
-            return true
-        } else {
-            CoreDataManager.data.deleteItem(id: movie.id)
-            if let index = savedMovieIds.firstIndex(of: movie.id) {
-                savedMovieIds.remove(at: index)
-            }
-            return false
-        }
+        viewModel.movieMarked(movie: movie)
+        return stateForCell
     }
 }
 
 extension MainViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        guard let text = searchController.searchBar.text, !text.isEmpty else {
-            openMoviesList = moviesList
-            mainCollection?.reloadData()
-            return
-        }
-        filterForSearchResults(text)
-        mainCollection?.reloadData()
-        
-        func filterForSearchResults(_ text: String) {
-                openMoviesList = moviesList.filter({ (movie: Movie) in
-                    return movie.name?.lowercased().contains(text.lowercased()) ?? false
-                })
-        }
+        viewModel.searchTextUpdated(text: searchController.searchBar.text)
     }
 }
-

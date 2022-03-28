@@ -1,11 +1,5 @@
-//
-//  MainCollectionViewCell.swift
-//  testAppClevertec
-//
-//  Created by Apple on 19.03.22.
-//
-
 import UIKit
+import SnapKit
 
 class MainCollectionViewCell: UICollectionViewCell {
     private let imageView = UIImageView()
@@ -14,7 +8,7 @@ class MainCollectionViewCell: UICollectionViewCell {
     private let yearGenreLabel = UILabel()
     private var heartState = false
     private var currentMovie: Movie?
-    private weak var delegate: MainCollectionViewCellDelegate?
+    private weak var delegate: MainCollectionViewCellType?
     private struct Properties {
         static let inset = 10
         static let cornerRadius: CGFloat = 10
@@ -34,10 +28,10 @@ class MainCollectionViewCell: UICollectionViewCell {
         static let heartButtonUnselectedText = "\u{2661}"
         static let imageViewColor = UIColor.systemGray4
     }
-    struct DateFormatConstants {
+    private struct DateFormatConstants {
         static let before = "yyyy-MM-dd"
         static let after = "yyyy"
-        static let incorrectData = "unknown"
+        static let incorrectData = ""
     }
     
     override init(frame: CGRect) {
@@ -111,8 +105,8 @@ class MainCollectionViewCell: UICollectionViewCell {
     }
     
     @objc private func heartButtonAction(sender: UIButton) {
-        guard let movie = currentMovie, let vc = delegate else { return }
-        heartState = vc.markMovie(movie: movie)
+        guard let movie = currentMovie, let controller = delegate else { return }
+        heartState = controller.markMovie(movie: movie)
         heartButtonText()
     }
     
@@ -120,47 +114,26 @@ class MainCollectionViewCell: UICollectionViewCell {
         heartButton.setTitle(heartState ? Properties.heartButtonSelectedText : Properties.heartButtonUnselectedText, for: .normal)
     }
     
-    private func titleText(name: String?) {
-        guard let text = name else { return }
+    func setupCell(movie: (Movie, Bool), delegate: MainCollectionViewCellType?) {
+        self.delegate = delegate
+        currentMovie = movie.0
+        heartState = movie.1
+        heartButtonText()
+        titleLabel.attributedText = titleText(name: movie.0.name)
+        yearGenreLabel.text = "\(movie.0.released ?? "")|\(movie.0.genresReady?.last ?? "")"
+        guard let image = movie.0.backgroundImageReady else { return }
+        imageView.image = UIImage(data: image as Data)
+    }
+    
+    private func titleText(name: String?) -> NSAttributedString {
+        guard let text = name else { return NSAttributedString()}
         let attrString = NSAttributedString(string: text, attributes: [
-            NSAttributedString.Key.foregroundColor : Properties.titleTextColor,
+            NSAttributedString.Key.foregroundColor: Properties.titleTextColor,
             NSAttributedString.Key.strokeColor: Properties.titleStrokeColor,
             NSAttributedString.Key.strokeWidth: Properties.titleStroke,
             NSAttributedString.Key.font: Properties.titleFont as Any
             ]
         )
-        titleLabel.attributedText = attrString
+        return attrString
     }
-    
-    func dateFormatter(_ date: String?) -> String {
-        guard let date = date else {return DateFormatConstants.incorrectData}
-        let formatterDate = DateFormatter()
-        formatterDate.dateFormat = DateFormatConstants.before
-        guard let year = formatterDate.date(from: date) else { return DateFormatConstants.incorrectData }
-        formatterDate.dateFormat = DateFormatConstants.after
-        return formatterDate.string(from: year)
-    }
-    
-    func getTwoGenres(allGenres: [String]) -> String {
-        var text = ""
-        for (index, value) in allGenres.enumerated() where index <= 1 {
-            text += "\(value) "
-        }
-        return text
-    }
-    
-    func setupCell(movie: Movie, isSaved: Bool, delegate: MainCollectionViewCellDelegate?) {
-        self.delegate = delegate
-        currentMovie = movie
-        heartState = isSaved
-        heartButtonText()
-        titleText(name: movie.name)
-        yearGenreLabel.text = " \(dateFormatter(movie.released))|\(getTwoGenres(allGenres: movie.genresReady ?? [])) "
-        guard let image = movie.backgroundImageReady else { return }
-        imageView.image = UIImage(data: image as Data)
-    }
-}
-
-protocol MainCollectionViewCellDelegate: AnyObject {
-    func markMovie(movie: Movie) -> Bool
 }

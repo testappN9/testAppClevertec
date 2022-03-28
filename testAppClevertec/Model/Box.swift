@@ -1,10 +1,3 @@
-//
-//  Box.swift
-//  testAppClevertec
-//
-//  Created by Apple on 26.03.22.
-//
-
 import Foundation
 
 class Box<T> {
@@ -22,7 +15,6 @@ class Box<T> {
     
     func bind(listener: @escaping Listener) {
         self.listener = listener
-        //listener(value)
     }
 }
 

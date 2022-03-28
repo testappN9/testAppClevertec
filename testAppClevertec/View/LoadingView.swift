@@ -1,10 +1,8 @@
-
 import UIKit
 
-class LoadingCustomView: UIView {
+class LoadingView: UIView {
     private let circle = UIBezierPath()
-    
-    struct Properties {
+    private struct Properties {
         static let circleLineWidth: CGFloat = 2
         static let circleLineColor = UIColor.systemGray4
         static let rotationDuration = 0.5

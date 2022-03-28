@@ -1,20 +1,13 @@
-//
-//  DetailsViewController.swift
-//  testAppClevertec
-//
-//  Created by Apple on 18.03.22.
-//
-
 import UIKit
 
 class DetailsViewController: UIViewController {
+    private var viewModel: DetailsViewModelType!
     private let scrollView = UIScrollView()
     private let contentView = UIView()
     private let posterView = UIImageView()
     private let ratingLabel = UILabel()
     private let genresLabel = UILabel()
     private let descriptionLabel = UILabel()
-    private var movie: Movie!
     private struct Properties {
         static let screenBackgroundColor = UIColor.white
         static let insets: CGFloat = 10
@@ -28,9 +21,9 @@ class DetailsViewController: UIViewController {
         static let descriptionFont = UIFont(name: "Optima Bold", size: 17)
     }
     
-    convenience init(movie: Movie) {
+    convenience init(viewModel: DetailsViewModelType) {
         self.init(nibName: nil, bundle: nil)
-        self.movie = movie
+        self.viewModel = viewModel
     }
     
     override init(nibName: String?, bundle: Bundle?) {
@@ -43,6 +36,27 @@ class DetailsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        bindingProcessing()
+        viewModel.viewsDidLoad()
+        customizeViews()
+    }
+    
+    private func bindingProcessing() {
+        viewModel.image.bind { [unowned self] image in
+            self.posterView.image = UIImage(data: image as Data)
+        }
+        viewModel.rating.bind { [unowned self] rating in
+            self.ratingLabel.text = rating
+        }
+        viewModel.genres.bind { [unowned self] genres in
+            self.genresLabel.text = genres
+        }
+        viewModel.descriptionReleased.bind { [unowned self] descriptionReleased in
+            self.descriptionLabel.text = descriptionReleased
+        }
+    }
+    
+    private func customizeViews() {
         self.view.backgroundColor = Properties.screenBackgroundColor
         scrollViewDesign()
         posterViewDesign()
@@ -51,7 +65,7 @@ class DetailsViewController: UIViewController {
         descriptionLabelDesign()
     }
     
-    func scrollViewDesign() {
+    private func scrollViewDesign() {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         scrollView.snp.makeConstraints { make in
@@ -66,9 +80,6 @@ class DetailsViewController: UIViewController {
     }
     
     private func posterViewDesign() {
-        if let data = movie.posterImageReady {
-            posterView.image = UIImage(data: data as Data)
-        }
         let width = view.frame.width - (Properties.insets * 2)
         let height = width * Properties.posterAspectRatio
         posterView.contentMode = .scaleAspectFill
@@ -84,9 +95,6 @@ class DetailsViewController: UIViewController {
     }
     
     private func ratingLabelDesign() {
-        if let data = movie.rating {
-            ratingLabel.text = String(data)
-        }
         ratingLabel.backgroundColor = Properties.ratingBackgroundColor
         ratingLabel.textColor = Properties.textColor
         ratingLabel.font = Properties.ratingFont
@@ -101,11 +109,6 @@ class DetailsViewController: UIViewController {
     }
     
     private func genresLabelDesign() {
-        var text = ""
-        for item in movie.genresReady ?? [] {
-            text += " \(item) "
-        }
-        genresLabel.text = text
         genresLabel.textColor = Properties.textColor
         genresLabel.font = Properties.genresFont
         genresLabel.textAlignment = .center
@@ -117,9 +120,6 @@ class DetailsViewController: UIViewController {
     }
     
     private func descriptionLabelDesign() {
-        if let description = movie.description, let released = movie.released {
-            descriptionLabel.text = "   \(description) Release date: \(released)."
-        }
         descriptionLabel.textAlignment = .justified
         descriptionLabel.font = Properties.descriptionFont
         descriptionLabel.textColor = Properties.textColor

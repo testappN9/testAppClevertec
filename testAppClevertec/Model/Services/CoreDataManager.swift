@@ -1,21 +1,12 @@
-//
-//  CoreDataManager.swift
-//  testAppClevertec
-//
-//  Created by Apple on 22.03.22.
-//
-
 import Foundation
 import UIKit
 import CoreData
 
 class CoreDataManager {
     static let data = CoreDataManager()
-    
     private init() {}
-    
-    private func getContext() -> NSManagedObjectContext{
-        return (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    private func getContext() -> NSManagedObjectContext {
+        return (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext ?? NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
     }
     
     private func saveContext(context: NSManagedObjectContext) {
@@ -26,7 +17,7 @@ class CoreDataManager {
         }
     }
     
-    func encodeData(data: Movie) -> Data? {
+    private func encodeData(data: Movie) -> Data? {
         do {
             return try JSONEncoder().encode(data)
         } catch {
@@ -35,7 +26,7 @@ class CoreDataManager {
         }
     }
     
-    func decodeData(data: Data) -> Movie? {
+    private func decodeData(data: Data) -> Movie? {
         do {
             return try JSONDecoder().decode(Movie?.self, from: data)
         } catch {
@@ -43,7 +34,7 @@ class CoreDataManager {
             return nil
         }
     }
-   
+    
     private func receiveData(id: Int?) -> ([Movie], NSManagedObjectContext, [MovieSaved]) {
         let context = getContext()
         let fetchRequest: NSFetchRequest<MovieSaved> = MovieSaved.fetchRequest()
@@ -85,7 +76,7 @@ class CoreDataManager {
         let movies = receiveData(id: id).0
         return movies != [] ? movies[0] : nil
     }
-
+    
     func saveItem(movie: Movie) {
         let context = getContext()
         let object = MovieSaved(context: context)

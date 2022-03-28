@@ -1,0 +1,9 @@
+excluded:
+  - Carthage
+  - Pods
+disabled_rules: 
+  - large_tuple
+  - nesting
+  - function_parameter_count
+  - trailing_whitespace
+  - line_length
