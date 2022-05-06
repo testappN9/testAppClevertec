@@ -7,8 +7,9 @@ class MainCollectionViewCell: UICollectionViewCell {
     private let titleLabel = UILabel()
     private let yearGenreLabel = UILabel()
     private var heartState = false
-    private var currentMovie: Movie?
-    private weak var delegate: MainCollectionViewCellType?
+    private var currentMovie: MovieCollectionItem?
+    var indexPath = 0
+    private weak var delegate: CollectionDataSourceType?
     private struct Properties {
         static let inset = 10
         static let cornerRadius: CGFloat = 10
@@ -108,21 +109,26 @@ class MainCollectionViewCell: UICollectionViewCell {
         guard let movie = currentMovie, let controller = delegate else { return }
         heartState = controller.markMovie(movie: movie)
         heartButtonText()
+        
     }
     
     private func heartButtonText() {
         heartButton.setTitle(heartState ? Properties.heartButtonSelectedText : Properties.heartButtonUnselectedText, for: .normal)
     }
     
-    func setupCell(movie: (Movie, Bool), delegate: MainCollectionViewCellType?) {
+    func setupCell(movie: MovieCollectionItem, delegate: CollectionDataSourceType?) {
         self.delegate = delegate
-        currentMovie = movie.0
-        heartState = movie.1
+        currentMovie = movie
+        heartState = movie.state
         heartButtonText()
-        titleLabel.attributedText = titleText(name: movie.0.name)
-        yearGenreLabel.text = "\(movie.0.released ?? "")|\(movie.0.genresReady?.last ?? "")"
-        guard let image = movie.0.backgroundImageReady else { return }
-        imageView.image = UIImage(data: image as Data)
+        titleLabel.attributedText = titleText(name: movie.name)
+        yearGenreLabel.text = "\(movie.released ?? "")|\(movie.genres ?? "")"
+        delegate?.getImageForCell(indexPath: indexPath, completitionHandler: { data in
+            DispatchQueue.main.async {
+                guard let imageData = data else { return }
+                self.imageView.image = UIImage(data: imageData as Data)
+            }
+        })
     }
     
     private func titleText(name: String?) -> NSAttributedString {

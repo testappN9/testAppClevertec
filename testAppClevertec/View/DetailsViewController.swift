@@ -37,22 +37,17 @@ class DetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         bindingProcessing()
-        viewModel.viewsDidLoad()
+        viewModel.getMovie()
         customizeViews()
     }
     
     private func bindingProcessing() {
-        viewModel.image.bind { [unowned self] image in
+        viewModel.readyMovie.bind { [unowned self] movie in
+            self.ratingLabel.text = movie.rating
+            self.genresLabel.text = movie.genres
+            self.descriptionLabel.text = movie.description
+            guard let image = movie.posterImage else { return }
             self.posterView.image = UIImage(data: image as Data)
-        }
-        viewModel.rating.bind { [unowned self] rating in
-            self.ratingLabel.text = rating
-        }
-        viewModel.genres.bind { [unowned self] genres in
-            self.genresLabel.text = genres
-        }
-        viewModel.descriptionReleased.bind { [unowned self] descriptionReleased in
-            self.descriptionLabel.text = descriptionReleased
         }
     }
     

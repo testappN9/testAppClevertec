@@ -1,10 +1,10 @@
 import Foundation
 
-struct MoviesModel: Codable {
-    var results: [Movie]?
+struct MoviesNetModel: Codable {
+    var results: [MovieNet]?
 }
 
-struct Movie: Codable, Equatable {
+struct MovieNet: Codable, Equatable {
     var id: Int
     var name: String?
     var backgroundImage: String?
@@ -13,9 +13,7 @@ struct Movie: Codable, Equatable {
     var genres: [Int]?
     var description: String?
     var rating: Float?
-    var genresReady: [String]?
-    var backgroundImageReady: Data?
-    var posterImageReady: Data?
+
     enum CodingKeys: String, CodingKey {
         case id
         case name = "title"
@@ -25,9 +23,6 @@ struct Movie: Codable, Equatable {
         case genres = "genre_ids"
         case description = "overview"
         case rating = "vote_average"
-        case genresReady
-        case backgroundImageReady
-        case posterImageReady
     }
 }
 
@@ -38,4 +33,12 @@ struct GenresModel: Codable {
 struct Genre: Codable {
     var id: Int
     var name: String?
+}
+
+enum NetworkError: String {
+    case success
+    case unableToDecode = "Unable to decode data"
+    case noData = "No data to decode"
+    case badRequest = "Something has changed on the server"
+    case connectionProblems = "Internet connection problems"
 }

@@ -1,15 +1,12 @@
 import UIKit
 
-class MainViewController: UIViewController {
-    private var viewModel: MainViewModelType!
+class FavoritesViewController: UIViewController {
+    private var viewModel: FavoritesViewModelType!
     private var movieCollection: CollectionType?
     private var viewForMovieCollection = UIView()
-    private var animatedСircle = LoadingView()
     private let headView = UIView()
     private let searchController = UISearchController(searchResultsController: nil)
     private struct Properties {
-        static let loadCircleSize: CGFloat = 100
-        static let loadCircleBackgroundColor = UIColor.clear
         static let headViewBackgroundColor = UIColor.systemGray6.withAlphaComponent(0.2)
         static let headViewBorderWidth: CGFloat = 0.5
         static let headViewBorderColor = UIColor.systemGray4.cgColor
@@ -17,12 +14,12 @@ class MainViewController: UIViewController {
     }
     
     private struct AlertText {
-        static let title = "Something went wrong"
-        static let buttonReload = "try again"
-        static let buttonCancel = "cancel"
+        static let title = "Delete this movie?"
+        static let buttonYes = "yes"
+        static let buttonNo = "no"
     }
     
-    convenience init(viewModel: MainViewModelType) {
+    convenience init(viewModel: FavoritesViewModel) {
         self.init(nibName: nil, bundle: nil)
         self.viewModel = viewModel
     }
@@ -38,7 +35,7 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         customizeViews()
-        viewModel.updateAllData(fromNetwork: true)
+        viewModel.updateAllData(fromNetwork: false)
         bindingProcessing()
     }
     
@@ -49,16 +46,15 @@ class MainViewController: UIViewController {
     
     private func bindingProcessing() {
         viewModel.updateCollection.bind { [unowned self] _ in
-            self.movieCollection?.endRefreshing()
             self.movieCollection?.updateCollection()
-            self.animatedСircle.isHidden = true
-            self.animatedСircle.animationStop()
         }
         
-        viewModel.alert.bind { [unowned self] error in
-            self.showAlert(error: error)
-            self.animatedСircle.isHidden = true
-            self.animatedСircle.animationStop()
+        viewModel.alert.bind { [unowned self] _ in
+            self.showAlert()
+        }
+        
+        viewModel.indexPathItemToDelete.bind { [unowned self] index in
+            movieCollection?.deleteItem(indexPath: index)
         }
         
         viewModel.movieForDetailsScreen.bind { [unowned self] movie in
@@ -69,7 +65,6 @@ class MainViewController: UIViewController {
     private func customizeViews() {
         setHeadView()
         setViewForMovieCollection()
-        setAnimatedСircle()
         setSearchController()
     }
     
@@ -92,18 +87,9 @@ class MainViewController: UIViewController {
             make.height.equalTo((tabBarController?.tabBar.frame.minY ?? view.safeAreaLayoutGuide.layoutFrame.height) - headView.safeAreaLayoutGuide.layoutFrame.height)
             make.leading.trailing.equalTo(view.safeAreaLayoutGuide)
         }
-        movieCollection = MainCollectionView(frame: viewForMovieCollection.safeAreaLayoutGuide.layoutFrame, viewModel: viewModel, activateRefreshControl: true)
+        movieCollection = MainCollectionView(frame: viewForMovieCollection.safeAreaLayoutGuide.layoutFrame, viewModel: viewModel, activateRefreshControl: false)
         if let movieCollection = movieCollection {
             viewForMovieCollection.addSubview(movieCollection)
-        }
-    }
-    
-    private func setAnimatedСircle() {
-        animatedСircle.backgroundColor = Properties.loadCircleBackgroundColor
-        viewForMovieCollection.addSubview(animatedСircle)
-        animatedСircle.snp.makeConstraints { make in
-            make.width.height.equalTo(Properties.loadCircleSize)
-            make.centerX.centerY.equalTo(viewForMovieCollection)
         }
     }
     
@@ -115,11 +101,12 @@ class MainViewController: UIViewController {
         headView.addSubview(searchController.searchBar)
     }
     
-    private func showAlert(error: NetworkError) {
-        let alert = UIAlertController(title: AlertText.title, message: error.rawValue, preferredStyle: .alert)
-        let actionOkey = UIAlertAction(title: AlertText.buttonReload, style: .default) { _ in
-            self.viewModel.updateAllData(fromNetwork: true)        }
-        let actionCancel = UIAlertAction(title: AlertText.buttonCancel, style: .default) { _ in
+    private func showAlert() {
+        let alert = UIAlertController(title: AlertText.title, message: nil, preferredStyle: .alert)
+        let actionOkey = UIAlertAction(title: AlertText.buttonYes, style: .default) { _ in
+            self.viewModel.deleteItem()
+            }
+        let actionCancel = UIAlertAction(title: AlertText.buttonNo, style: .default) { _ in
         }
         alert.view.tintColor = .black
         alert.addAction(actionOkey)
@@ -128,7 +115,7 @@ class MainViewController: UIViewController {
     }
 }
 
-extension MainViewController: UISearchResultsUpdating {
+extension FavoritesViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         viewModel.searchTextUpdated(text: searchController.searchBar.text)
     }

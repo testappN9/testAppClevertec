@@ -18,8 +18,8 @@ class TabBarController: UITabBarController {
         tabBar.barTintColor = Properties.barTintColor
         tabBar.tintColor = Properties.selectedItemTintColor
         tabBar.unselectedItemTintColor = Properties.unselectedItemTintColor
-        let main = MainViewController(viewModel: MainScreenViewModel(), refreshControl: UIRefreshControl(), animatedСircle: LoadingView())
-        let favorites = MainViewController(viewModel: FavoritesScreenViewModel(), refreshControl: nil, animatedСircle: nil)
+        let main = MainViewController(viewModel: MainViewModel())
+        let favorites = FavoritesViewController(viewModel: FavoritesViewModel())
         main.tabBarItem = UITabBarItem(title: Properties.mainName, image: Properties.mainImage, tag: 0)
         favorites.tabBarItem = UITabBarItem(title: Properties.favoritesName, image: Properties.favoritesImage, tag: 1)
         viewControllers = [main, favorites]
